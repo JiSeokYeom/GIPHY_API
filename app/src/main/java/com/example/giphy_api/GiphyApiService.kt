@@ -3,7 +3,7 @@ package com.example.giphy_api
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.giphy_api.api.GiphyApi
-import com.example.giphy_api.model.TrendingDTO
+import com.example.giphy_api.model.TrendingData
 import com.example.giphy_api.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,12 +15,12 @@ class GiphyApiService {
     private val TAG = "GiphyApiService"
 
 
-    fun getApi() : MutableLiveData<TrendingDTO>{
-        val result : MutableLiveData<TrendingDTO> = MutableLiveData()
-        val call : Call<TrendingDTO> = service!!.getTrendingGif(API_KEY,20)
+    fun getApi() : MutableLiveData<TrendingData>{
+        val result : MutableLiveData<TrendingData> = MutableLiveData()
+        val call : Call<TrendingData> = service!!.getTrendingGif(API_KEY,20)
 
-        call.enqueue(object : Callback<TrendingDTO>{
-            override fun onResponse(call: Call<TrendingDTO>, response: Response<TrendingDTO>) {
+        call.enqueue(object : Callback<TrendingData>{
+            override fun onResponse(call: Call<TrendingData>, response: Response<TrendingData>) {
                 Log.d(TAG,"통신 성공")
 
                 if (response.isSuccessful){
@@ -35,7 +35,7 @@ class GiphyApiService {
                 }
             }
 
-            override fun onFailure(call: Call<TrendingDTO>, t: Throwable) {
+            override fun onFailure(call: Call<TrendingData>, t: Throwable) {
                 Log.d(TAG,"통신 실패")
             }
         })

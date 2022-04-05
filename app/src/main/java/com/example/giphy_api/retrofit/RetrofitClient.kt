@@ -1,6 +1,5 @@
 package com.example.giphy_api.retrofit
 
-import com.example.giphy_api.MainActivity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -5,29 +5,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.giphy_api.GiphyApiService
 import com.example.giphy_api.api.GiphyApi
-import com.example.giphy_api.model.TrendingDTO
+import com.example.giphy_api.model.TrendingData
 import com.example.giphy_api.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class TrendingViewModel : ViewModel() {
     private val TAG = "MainViewModel"
-    private val result  = MutableLiveData<TrendingDTO>()
+    private val result  = MutableLiveData<TrendingData>()
     private val giphyApiService = GiphyApiService()
     private val service  = RetrofitClient.getClient()?.create(GiphyApi::class.java)
     private val API_KEY = "0nYnzIFi1SjxgPRcMp4RmIPdiKMSEG02"
 
-   /* fun getTrending():MutableLiveData<TrendingDTO>{
-        result.value = giphyApiService.getApi()
-        return result
-    }*/
-   fun getTrending():MutableLiveData<TrendingDTO>{
-    val result : MutableLiveData<TrendingDTO> = MutableLiveData()
-    val call : Call<TrendingDTO> = service!!.getTrendingGif(API_KEY,20)
 
-    call.enqueue(object : Callback<TrendingDTO> {
-        override fun onResponse(call: Call<TrendingDTO>, response: Response<TrendingDTO>) {
+   fun getTrending():MutableLiveData<TrendingData>{
+    val result : MutableLiveData<TrendingData> = MutableLiveData()
+    val call : Call<TrendingData> = service!!.getTrendingGif(API_KEY,21)
+
+    call.enqueue(object : Callback<TrendingData> {
+        override fun onResponse(call: Call<TrendingData>, response: Response<TrendingData>) {
             Log.d(TAG,"통신 성공")
 
             if (response.isSuccessful){
@@ -42,7 +39,7 @@ class MainViewModel : ViewModel() {
             }
         }
 
-        override fun onFailure(call: Call<TrendingDTO>, t: Throwable) {
+        override fun onFailure(call: Call<TrendingData>, t: Throwable) {
             Log.d(TAG,"통신 실패")
         }
     })

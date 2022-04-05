@@ -1,6 +1,6 @@
 package com.example.giphy_api.api
 
-import com.example.giphy_api.model.TrendingDTO
+import com.example.giphy_api.model.TrendingData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,5 +10,5 @@ interface GiphyApi {
     fun getTrendingGif(
         @Query("api_key") apiKey : String,
         @Query("limit") limit : Int
-    ) : Call<TrendingDTO>
+    ) : Call<TrendingData>
 }
