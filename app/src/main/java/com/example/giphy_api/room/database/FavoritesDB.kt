@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.giphy_api.room.dao.TrendingRoomDao
 import com.example.giphy_api.room.entity.UserFavoritesData
 
-@Database(entities = [UserFavoritesData::class], version = 1)
+@Database(entities = [UserFavoritesData::class], version = 2)
 abstract class FavoritesDB : RoomDatabase(){
     abstract fun trendingRoomDao():TrendingRoomDao
 

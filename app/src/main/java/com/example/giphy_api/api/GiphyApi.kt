@@ -9,6 +9,7 @@ interface GiphyApi {
     @GET("/v1/gifs/trending")
     fun getTrendingGif(
         @Query("api_key") apiKey : String,
-        @Query("limit") limit : Int
+        @Query("limit") limit : Int,
+        @Query("offset") offset : Int
     ) : Call<TrendingData>
 }

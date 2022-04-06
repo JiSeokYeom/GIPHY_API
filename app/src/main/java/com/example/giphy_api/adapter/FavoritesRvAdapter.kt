@@ -1,21 +1,39 @@
 package com.example.giphy_api.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.giphy_api.R
 import com.example.giphy_api.databinding.RvItemBinding
 import com.example.giphy_api.model.list
 import com.example.giphy_api.room.entity.UserFavoritesData
 
 class FavoritesRvAdapter : RecyclerView.Adapter<FavoritesRvAdapter.ViewHolder>(){
-    var trendingData = mutableListOf<UserFavoritesData>()
+    var favoritesData = listOf<UserFavoritesData>()
+    var selectSW = false
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+
+    private lateinit var itemClickListener : OnItemClickListener
 
     inner class ViewHolder(var binding : RvItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item:UserFavoritesData){
             Glide.with(itemView.context)
                 .load(item.url)
                 .into(binding.itemImg)
+            binding.FavoritesImg.setImageResource(R.drawable.star_pressed)
+
+            binding.FavoritesImg.setOnClickListener {
+               itemClickListener.onClick(it, position)
+            }
         }
     }
 
@@ -25,11 +43,11 @@ class FavoritesRvAdapter : RecyclerView.Adapter<FavoritesRvAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = trendingData[position]
+        val item = favoritesData[position]
         holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        return trendingData.size
+        return favoritesData.size
     }
 }

@@ -19,11 +19,9 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(Applicatio
         userUrls = db.trendingRoomDao().getFavoritesAll()
     }
 
-    fun insert(userUrl : UserFavoritesData){
-        trendingRoomDao.insert(userUrl)
-    }
-
-    fun delete(userUrl: String){
+    fun delete(userUrl : String){
         trendingRoomDao.delete(userUrl)
     }
+
+
 }

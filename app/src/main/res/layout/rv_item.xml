@@ -9,8 +9,8 @@
         android:layout_height="150dp"
         android:src="@mipmap/ic_launcher"/>
 
-    <Button
-        android:id="@+id/Favorites_btn"
+    <ImageView
+        android:id="@+id/Favorites_img"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="90dp"

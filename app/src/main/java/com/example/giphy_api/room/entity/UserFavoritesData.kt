@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class UserFavoritesData(
-    @PrimaryKey
-    var num : Int = 0,
     var url : String
-)
+){
+    @PrimaryKey(autoGenerate = true) var id : Int = 0
+}
