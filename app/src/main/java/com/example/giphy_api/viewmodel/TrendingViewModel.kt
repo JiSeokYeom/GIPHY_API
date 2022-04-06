@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.giphy_api.api.GiphyApi
 import com.example.giphy_api.model.TrendingData
 import com.example.giphy_api.retrofit.RetrofitClient
-import com.example.giphy_api.room.dao.TrendingRoomDao
+import com.example.giphy_api.room.dao.RoomDao
 import com.example.giphy_api.room.database.FavoritesDB
 import com.example.giphy_api.room.entity.UserFavoritesData
 import retrofit2.Call
@@ -18,21 +18,22 @@ class TrendingViewModel(application: Application) : AndroidViewModel(Application
     private val TAG = "MainViewModel"
     private val service  = RetrofitClient.getClient()?.create(GiphyApi::class.java)
     private val API_KEY = "0nYnzIFi1SjxgPRcMp4RmIPdiKMSEG02"
-    private var trendingRoomDao : TrendingRoomDao
+    private var roomDao : RoomDao
 
 
     init {
         val db = FavoritesDB.getInstance(application)
-        trendingRoomDao = db!!.trendingRoomDao()
+        roomDao = db!!.trendingRoomDao()
     }
 
     fun insert(userUrl : UserFavoritesData){
-        trendingRoomDao.insert(userUrl)
+        roomDao.insert(userUrl)
     }
 
     fun delete(userUrl: String){
-        trendingRoomDao.delete(userUrl)
+        roomDao.delete(userUrl)
     }
+
 
    fun getTrending(pageOffset : Int):MutableLiveData<TrendingData>{
     val result : MutableLiveData<TrendingData> = MutableLiveData()

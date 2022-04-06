@@ -61,7 +61,7 @@ class TrendingFragment : Fragment(){
                     val itemTotalCount = recyclerView.adapter!!.itemCount-1
 
                     if (!recyclerView.canScrollVertically(1) && lastVisibleItemPosition == itemTotalCount) {
-                        Log.d(TAG,"카운터 $itemTotalCount 포지션 끝 $lastVisibleItemPosition")
+                        Log.d(TAG,"카운트 $itemTotalCount 포지션 끝 $lastVisibleItemPosition")
                         pageOffset = lastVisibleItemPosition
                         moreItem()
                     }

@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.example.giphy_api.room.entity.UserFavoritesData
 
 @Dao
-interface TrendingRoomDao {
+interface RoomDao {
     @Insert
     fun insert(userFavoritesData: UserFavoritesData)
 
@@ -16,5 +16,6 @@ interface TrendingRoomDao {
 
     @Query("DELETE FROM UserFavoritesData WHERE url = :url")
     fun delete(url : String)
+
 
 }

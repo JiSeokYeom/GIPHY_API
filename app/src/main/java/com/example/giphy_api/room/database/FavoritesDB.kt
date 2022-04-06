@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.giphy_api.room.dao.TrendingRoomDao
+import com.example.giphy_api.room.dao.RoomDao
 import com.example.giphy_api.room.entity.UserFavoritesData
 
 @Database(entities = [UserFavoritesData::class], version = 2)
 abstract class FavoritesDB : RoomDatabase(){
-    abstract fun trendingRoomDao():TrendingRoomDao
+    abstract fun trendingRoomDao():RoomDao
 
     companion object{
         private var instance : FavoritesDB? = null

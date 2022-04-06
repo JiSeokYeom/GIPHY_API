@@ -1,9 +1,8 @@
 package com.example.giphy_api.adapter
 
-import android.graphics.Color
+import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,25 +20,15 @@ import kotlinx.coroutines.launch
 class TrendingRvAdapter(fragment: Fragment) : RecyclerView.Adapter<TrendingRvAdapter.ViewHolder>(){
     var trendingData = mutableListOf<list>()
     var selectArray = SparseBooleanArray(0)
-    var selectSW = false
     private val trendingViewModel: TrendingViewModel by lazy {
         ViewModelProvider(fragment).get(TrendingViewModel::class.java)
     }
 
-    interface OnItemClickListener {
-        fun onClick(v: View, binding: RvItemBinding, position: Int)
-    }
-
-    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
-        this.itemClickListener = onItemClickListener
-    }
-
-    private lateinit var itemClickListener : OnItemClickListener
-
     inner class ViewHolder(var binding : RvItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item:list){
+            val itemurl : String = item.images.fixed_height.url
             Glide.with(itemView.context)
-                .load(item.images.fixed_height.url)
+                .load(itemurl)
                 .into(binding.itemImg)
             binding.FavoritesImg.setOnClickListener {
                 if (selectArray.get(position, false)){
@@ -55,8 +44,6 @@ class TrendingRvAdapter(fragment: Fragment) : RecyclerView.Adapter<TrendingRvAda
                         trendingViewModel.insert(UserFavoritesData(trendingData[position].images.fixed_height.url))
                     }
                 }
-
-//                itemClickListener.onClick(it, binding,position)
             }
 
         }
