@@ -2,6 +2,7 @@ package com.example.giphy_api.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,14 +29,13 @@ class TrendingFragment : Fragment(){
     }
     private lateinit var trendingRvAdapter : TrendingRvAdapter
     private val TAG = "TrendingFragment"
-    var selectSW = true
     companion object{
         var pageOffset : Int = 0
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentTrendingBinding.inflate(inflater,container,false)
 
-        trendingRvAdapter = TrendingRvAdapter()
+        trendingRvAdapter = TrendingRvAdapter(this)
 
         binding.apply {
             trendingRv.adapter = trendingRvAdapter
@@ -51,26 +51,6 @@ class TrendingFragment : Fragment(){
                 trendingRvAdapter.notifyDataSetChanged()
             }
 
-            trendingRvAdapter.setItemClickListener(object : TrendingRvAdapter.OnItemClickListener{
-                override fun onClick(v: View, binding: RvItemBinding ,position: Int) {
-                    Log.d(TAG,"${trendingRvAdapter.trendingData[position].images.fixed_height.url}")
-                    Log.d(TAG,"$position")
-                    if (selectSW){
-                        binding.FavoritesImg.setImageResource(R.drawable.star_pressed)
-                        CoroutineScope(Dispatchers.IO).launch {
-                            trendingViewModel.insert(UserFavoritesData(trendingRvAdapter.trendingData[position].images.fixed_height.url))
-                        }
-                        selectSW = false
-                    }
-                    else{
-                        binding.FavoritesImg.setImageResource(R.drawable.star)
-                        CoroutineScope(Dispatchers.IO).launch {
-                            trendingViewModel.delete(trendingRvAdapter.trendingData[position].images.fixed_height.url)
-                        }
-                        selectSW = true
-                    }
-                }
-            })
 
             // 스크롤 끝 확인
             trendingRv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
